@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'omisoft_after_authorization_page.dart';
 
 class OmisoftLoginPage extends StatefulWidget {
   const OmisoftLoginPage({Key? key}) : super(key: key);
@@ -183,7 +184,16 @@ class _OmisoftLoginPageState extends State<OmisoftLoginPage> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return AfterAuthorizationPage();
+                              },
+                            ),
+                          );
+                        },
                         color: Colors.blue,
                         textColor: Colors.white,
                         child: Text('Увійти'),
