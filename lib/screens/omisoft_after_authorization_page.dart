@@ -21,12 +21,12 @@ class _AfterAuthorizationPageState extends State<AfterAuthorizationPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return OmisoftLoginPage();
+                    return const OmisoftLoginPage();
                   },
                 ),
               );
             },
-            child: Text(
+            child: const Text(
               'Вихід',
               style: TextStyle(fontSize: 40.0),
             ),
