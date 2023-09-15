@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'screens/omisoft_login_page.dart';
 
 void main() {
@@ -9,10 +8,9 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: HomePage(),
     );
   }
@@ -38,14 +36,14 @@ class _HomePageState extends State<HomePage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return OmisoftLoginPage();
+                    return const OmisoftLoginPage();
                   },
                 ),
               );
               //Navigator.pop(context);
             });
           },
-          child: Text(
+          child: const Text(
             'Тестова сторінка',
             style: TextStyle(fontSize: 40.0),
           ),
