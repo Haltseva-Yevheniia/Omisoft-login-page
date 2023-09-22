@@ -3,6 +3,9 @@ import 'package:omisoft_test_login/services/networking.dart';
 import 'package:omisoft_test_login/screens/omisoft_after_authorization_page.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+String userEmail = '';
+String userPassword = '';
+
 class RowButtons extends StatelessWidget {
   const RowButtons({
     Key? key,
@@ -128,20 +131,33 @@ class OrDivider extends StatelessWidget {
   }
 }
 
-class PasswordTextField extends StatelessWidget {
+class PasswordTextField extends StatefulWidget {
   const PasswordTextField({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  @override
   Widget build(BuildContext context) {
-    return const Expanded(
+    return Expanded(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40.0),
+        padding: const EdgeInsets.symmetric(horizontal: 40.0),
         child: TextField(
           //autofocus: true,
+          onChanged: (value) {
+            userPassword = value;
+            print(userPassword);
+          },
+          // onSubmitted: (value) {
+          //   userPassword = value;
+          //   print(userPassword);
+          // },
           obscureText: true,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Пароль',
           ),
         ),
@@ -150,22 +166,35 @@ class PasswordTextField extends StatelessWidget {
   }
 }
 
-class EmailTextField extends StatelessWidget {
+class EmailTextField extends StatefulWidget {
   const EmailTextField({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<EmailTextField> createState() => _EmailTextFieldState();
+}
+
+class _EmailTextFieldState extends State<EmailTextField> {
+  @override
   Widget build(BuildContext context) {
-    return const Expanded(
+    return Expanded(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 40.0),
+        padding: const EdgeInsets.symmetric(horizontal: 40.0),
         child: TextField(
           autofocus: true,
           keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Поштова скринька',
           ),
+          onChanged: (value) {
+            userEmail = value;
+            print(userEmail);
+          },
+          // onSubmitted: (value) {
+          //   userEmail = value;
+          //   print(userEmail);
+          // },
         ),
       ),
     );
@@ -190,7 +219,12 @@ class LoginButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 onPressed: () {
-                  makeRequest();
+                  NetworkRequest networkRequest =
+                      NetworkRequest(userEmail, userPassword);
+                  networkRequest.makeRequest();
+                  // makeRequest(
+                  //     userEmail: 'Developer5@gmail.com',
+                  //     userPassword: '123456');
                   Navigator.push(
                     context,
                     MaterialPageRoute(
