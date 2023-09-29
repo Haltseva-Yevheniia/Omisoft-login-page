@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:omisoft_test_login/components/login_page_components.dart';
+import 'package:omisoft_test_login/components/text_field_email_password.dart';
+import 'package:omisoft_test_login/components/forget_password_button.dart';
+import 'package:omisoft_test_login/components/login_button.dart';
+import 'package:omisoft_test_login/components/text_head_line.dart';
+import 'package:omisoft_test_login/components/row_buttons_registration.dart';
+import 'package:omisoft_test_login/components/or_divider.dart';
 
 class OmisoftLoginPage extends StatefulWidget {
   const OmisoftLoginPage({Key? key}) : super(key: key);
@@ -9,6 +14,9 @@ class OmisoftLoginPage extends StatefulWidget {
 }
 
 class _OmisoftLoginPageState extends State<OmisoftLoginPage> {
+  String email = '';
+  String password = '';
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -18,14 +26,22 @@ class _OmisoftLoginPageState extends State<OmisoftLoginPage> {
         appBar: AppBar(),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
-            TextHeadline(),
-            RowButtons(),
-            OrDivider(),
-            EmailTextField(),
-            PasswordTextField(),
-            ForgetPasswordButton(),
-            LoginButton(),
+          children: [
+            const TextHeadline(),
+            const RowButtons(),
+            const OrDivider(),
+            EmailTextField((value) {
+              setState(() {
+                email = value;
+              });
+            }),
+            PasswordTextField((value) {
+              setState(() {
+                password = value;
+              });
+            }),
+            const ForgetPasswordButton(),
+            LoginButton(email, password),
           ],
         ),
       ),
