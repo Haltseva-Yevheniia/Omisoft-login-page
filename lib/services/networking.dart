@@ -9,7 +9,7 @@ import 'dart:developer';
 class NetworkRequest {
   String userEmail;
   String userPassword;
-  bool finalResponse = false;
+  bool finalResponse = true;
   NetworkRequest(this.userEmail, this.userPassword);
 
   Future<http.Response> makeRequest() async {
@@ -34,9 +34,9 @@ class NetworkRequest {
     if (response.statusCode == 200) {
       log('Код запиту: ${response.statusCode}');
       log(responseDecode);
-      //finalResponse = true;
+      finalResponse = true;
     } else {
-      //finalResponse = false;
+      finalResponse = false;
       log('ERROR: ${response.statusCode}');
     }
     return response;
