@@ -9,10 +9,10 @@ import 'dart:developer';
 class NetworkRequest {
   String userEmail;
   String userPassword;
-  bool finalResponse = true;
+  bool checkResponse = true;
   NetworkRequest(this.userEmail, this.userPassword);
 
-  Future<http.Response> makeRequest() async {
+  Future<http.Response?> makeRequest() async {
     Uri url =
         Uri.parse('http://restapi.adequateshop.com/api/authaccount/login');
     Map<String, String> bodyData = {
@@ -32,11 +32,11 @@ class NetworkRequest {
     //final responseName = responseDecode['data'];
     //final responseMessage = responseDecode['message'];
     if (response.statusCode == 200) {
+      checkResponse = true;
       log('Код запиту: ${response.statusCode}');
       log(responseDecode);
-      finalResponse = true;
     } else {
-      finalResponse = false;
+      checkResponse = false;
       log('ERROR: ${response.statusCode}');
     }
     return response;

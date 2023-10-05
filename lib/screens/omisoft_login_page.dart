@@ -22,29 +22,61 @@ class _OmisoftLoginPageState extends State<OmisoftLoginPage> {
     return SafeArea(
       child: Scaffold(
         // TODO try to use SingleChildScrollView but I cant (((
-        resizeToAvoidBottomInset: false,
+        //resizeToAvoidBottomInset: false,
         appBar: AppBar(),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const TextHeadline(),
-            const RowButtons(),
-            const OrDivider(),
-            EmailTextField((value) {
-              setState(() {
-                email = value;
-              });
-            }),
-            PasswordTextField((value) {
-              setState(() {
-                password = value;
-              });
-            }),
-            const ForgetPasswordButton(),
-            LoginButton(email, password),
-          ],
-        ),
+        body: LayoutBuilder(builder:
+            (BuildContext context, BoxConstraints viewportConstraints) {
+          return SingleChildScrollView(
+            //keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+            child: Column(
+              //mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const TextHeadline(),
+                const SizedBox(
+                  height: 50,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const RowButtons(),
+                const SizedBox(
+                  height: 50,
+                ),
+                const OrDivider(),
+                const SizedBox(
+                  height: 20,
+                ),
+                EmailTextField((value) {
+                  setState(() {
+                    email = value;
+                  });
+                }),
+                PasswordTextField((value) {
+                  setState(() {
+                    password = value;
+                  });
+                }),
+                const ForgetPasswordButton(),
+                const SizedBox(
+                  height: 40,
+                ),
+                LoginButton(email, password),
+              ],
+            ),
+          );
+        }),
       ),
     );
   }
 }
+
+// body: LayoutBuilder(builder:
+// (BuildContext context, BoxConstraints viewportConstraints) {
+// return SingleChildScrollView(
+// keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
+// child: ConstrainedBox(
+// constraints:
+// BoxConstraints(minHeight: viewportConstraints.maxHeight),
+// child: IntrinsicHeight(
+// child: Column(

@@ -7,36 +7,34 @@ class OrDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          SizedBox(
-            width: 100.0,
-            height: 15.0,
-            child: Divider(
-              color: Colors.grey,
-            ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        SizedBox(
+          width: 100.0,
+          height: 15.0,
+          child: Divider(
+            color: Colors.grey,
           ),
-          SizedBox(
-            width: 20.0,
+        ),
+        SizedBox(
+          width: 20.0,
+        ),
+        Text(
+          'або',
+          style: TextStyle(fontSize: 30.0),
+        ),
+        SizedBox(
+          width: 20.0,
+        ),
+        SizedBox(
+          width: 100.0,
+          height: 15.0,
+          child: Divider(
+            color: Colors.grey,
           ),
-          Text(
-            'або',
-            style: TextStyle(fontSize: 30.0),
-          ),
-          SizedBox(
-            width: 20.0,
-          ),
-          SizedBox(
-            width: 100.0,
-            height: 15.0,
-            child: Divider(
-              color: Colors.grey,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

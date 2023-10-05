@@ -25,16 +25,26 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   //late bool newResponse;
-  Future requestSend() async {
+  void requestSend() async {
+    // NetworkRequest(widget.userEmail, widget.userPassword)
+    //     .makeRequest()
+    //     .timeout(Duration(seconds: 6), onTimeout: () {
+    //   return null;
+    // });
     NetworkRequest networkRequest =
         NetworkRequest(widget.userEmail, widget.userPassword);
-    await networkRequest.makeRequest();
-    bool newResponse = networkRequest.finalResponse;
+    networkRequest.makeRequest();
+    // .timeout(Duration(seconds: 6), onTimeout: () {
+    // return null
+    // });
+    bool newResponse =
+        await NetworkRequest(widget.userEmail, widget.userPassword)
+            .checkResponse;
     log('$newResponse');
     // makeRequest(
     //     userEmail: 'Developer5@gmail.com',
     //     userPassword: '123456');
-    // TODO Не успевает получить ответ и сразу выдает Waite
+    // TODO Не успевает получить ответ и сразу выдает 'Waite'
     if (newResponse == true) {
       Navigator.push(
         context,
@@ -47,25 +57,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     } else {
       ShowButtonToast('Невірний email або пароль').showMessageToast();
     }
-
-    return newResponse;
   }
-
-  // void checkResponse(newResponse) {
-  //   log('start check');
-  //   if (newResponse == true) {
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(
-  //         builder: (context) {
-  //           return const AfterAuthorizationPage();
-  //         },
-  //       ),
-  //     );
-  //   } else {
-  //     ShowButtonToast('Невірний email або пароль').showMessageToast();
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

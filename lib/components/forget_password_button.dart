@@ -8,13 +8,11 @@ class ForgetPasswordButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: TextButton(
-        onPressed: () {
-          ShowButtonToast('Відновити пароль').showMessageToast();
-        },
-        child: const Text('Забули пароль?'),
-      ),
+    return TextButton(
+      onPressed: () {
+        ShowButtonToast('Відновити пароль').showMessageToast();
+      },
+      child: const Text('Забули пароль?'),
     );
   }
 }

@@ -16,36 +16,33 @@ class LoginButton extends StatefulWidget {
 class _LoginButtonState extends State<LoginButton> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Row(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: MaterialButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                onPressed: () {
-                  //getFinalResponse(userEmail, userPassword);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) {
-                      return LoadingScreen(
-                          widget.userEmail, widget.userPassword);
-                    }),
-                  );
-                  log(widget.userEmail);
-                  log(widget.userPassword);
-                },
-                color: Colors.blue,
-                textColor: Colors.white,
-                child: const Text('Увійти'),
+    return Row(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
               ),
+              onPressed: () {
+                //getFinalResponse(userEmail, userPassword);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return LoadingScreen(widget.userEmail, widget.userPassword);
+                  }),
+                );
+                log(widget.userEmail);
+                log(widget.userPassword);
+              },
+              color: Colors.blue,
+              textColor: Colors.white,
+              child: const Text('Увійти'),
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
