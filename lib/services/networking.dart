@@ -3,16 +3,15 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:developer';
 
-//'email': 'Developer5@gmail.com'
+//'email': 'Developer5+555@gmail.com'
 //'password': '123456'
 
 class NetworkRequest {
   String userEmail;
   String userPassword;
-  bool checkResponse = true;
   NetworkRequest(this.userEmail, this.userPassword);
 
-  Future<http.Response?> makeRequest() async {
+  Future<Map<String, dynamic>> makeRequest() async {
     Uri url =
         Uri.parse('http://restapi.adequateshop.com/api/authaccount/login');
     Map<String, String> bodyData = {
@@ -31,14 +30,8 @@ class NetworkRequest {
     final responseDecode = jsonDecode(response.body);
     //final responseName = responseDecode['data'];
     //final responseMessage = responseDecode['message'];
-    if (response.statusCode == 200) {
-      checkResponse = true;
-      log('Код запиту: ${response.statusCode}');
-      log(responseDecode);
-    } else {
-      checkResponse = false;
-      log('ERROR: ${response.statusCode}');
-    }
-    return response;
+    log('Код запиту: ${response.statusCode}');
+    log('Response: $responseDecode');
+    return responseDecode;
   }
 }
