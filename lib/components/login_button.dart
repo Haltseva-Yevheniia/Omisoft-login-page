@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:omisoft_test_login/screens/omisoft_after_authorization_page.dart';
-
+import 'package:omisoft_test_login/components/show_button_toast.dart';
 import '../services/networking.dart';
 
 class LoginButton extends StatefulWidget {
@@ -28,8 +28,10 @@ class _LoginButtonState extends State<LoginButton> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
               onPressed: () async {
-                bool result = await sendRequest();
+                bool result = await requestCode();
                 if (result) {
+                  String token=await requestToken();
+                  log(token);
                   if (context.mounted) {
                     Navigator.push(
                       context,
@@ -40,6 +42,7 @@ class _LoginButtonState extends State<LoginButton> {
                   }
                 } else {
                   log('Not open');
+                  ShowButtonToast('ERROR').showMessageToast();
                   //TODO show error
                 }
                 log(widget.userEmail);
@@ -55,7 +58,7 @@ class _LoginButtonState extends State<LoginButton> {
     );
   }
 
-  Future<bool> sendRequest() async {
+  Future<bool> requestCode() async {
     NetworkRequest networkRequest =
         NetworkRequest(widget.userEmail, widget.userPassword);
     networkRequest.makeRequest();
@@ -65,16 +68,18 @@ class _LoginButtonState extends State<LoginButton> {
     log('$newResponse');
     return newResponse['code']== 0;
   }
-  // Future<List<dynamic>> requestSend() async {
-  //   NetworkRequest networkRequest =
-  //   NetworkRequest(widget.userEmail, widget.userPassword);
-  //   networkRequest.makeRequest();
-  //   Map<String, dynamic> newResponse =
-  //   await NetworkRequest(widget.userEmail, widget.userPassword)
-  //       .makeRequest();
-  //   log('$newResponse');
-  //   return [newResponse['code']== 0, newResponse['message']['token']];
-  // }
+  Future<String> requestToken() async {
+    NetworkRequest networkRequest =
+    NetworkRequest(widget.userEmail, widget.userPassword);
+    networkRequest.makeRequest();
+    Map<String, dynamic> newResponse =
+    await NetworkRequest(widget.userEmail, widget.userPassword)
+        .makeRequest();
+    log('$newResponse');
+    return newResponse['data']['Token'];
+  }
+// Receive new response and then make 2 functions to take the code and to take the token
+
 
 
 
